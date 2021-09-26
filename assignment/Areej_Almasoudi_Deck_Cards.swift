@@ -59,11 +59,11 @@ class Player{
     var name : String = ""
     var hand : [Card] = []
     
-    func draw(duck : Duck) -> [Card] {
-    for i in 0..<duck.cards.count{
-        hand.append(duck.cards[i])
-    }
-        return hand
+    func draw(duck : Duck) -> Card {
+    
+    let card = duck.deal()
+    hand.append(card)
+        return card
     }
     
     func rollDice () -> Int{
@@ -80,3 +80,5 @@ class Player{
         return count
     }
 }
+
+
