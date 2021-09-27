@@ -1,84 +1,84 @@
 import Foundation
 import Glibc
-//task 1 Create a struct called "Card"
-struct Card{ 
-var Color : Colors = .Blue
-var Roll : Int = 0
- init (color : Colors){
-     //Matching Enumeration Values and Set the number of Roll by color
-     self.Color = color
-switch color {
-case .Red:
-    self.Roll = Int.random(in : 3...4)
+//task 1 Create a class called "Animal"
+class Animal{
+    var name : String 
+    var health : Int
     
-case .Blue:
-    self.Roll = Int.random(in : 1...2)
-     
-case .Green:
-    self.Roll = Int.random(in : 4...6)
-     
- }
-}
-}
-// enumeration type
-enum Colors  {
-    case Red
-    case Blue
-    case Green
-}
-//take 2 
-class Duck{
-    var cards : [Card] = []
-    
-    init(){
-    for _ in 1...10{
-        self.cards.append(Card(color: Colors.Blue))
-        self.cards.append(Card(color: Colors.Red))
-        self.cards.append(Card(color: Colors.Green))
-        
-    }
-        
+    init( name : String , health : Int = 100){
+        self.name = name
+        self.health = health
     }
     
-    func deal() -> Card{
-    let card = self.cards.remove(at : 0)
-        return card
-    }
-    
-    func isEmpty() -> Bool  {
-        return cards.isEmpty
-    }
-    
-    func shuffle(){
-        self.cards = self.cards.shuffled()
+    func displayHealth(){
+        print("The health of anime is \(health)")
     }
 }
 
-//task 3
-class Player{
-    var name : String = ""
-    var hand : [Card] = []
+//task 2
+class Cat : Animal{
+
+ init (name : String ){
+super.init(name : name , health : 150)
     
-    func draw(duck : Duck) -> [Card] {
-    for i in 0..<duck.cards.count{
-        hand.append(duck.cards[i])
+}
+   func growl(){
+        print("Rawr!")
     }
-        return hand
-    }
-    
-    func rollDice () -> Int{
-        return Int.random(in: 1...6)
-    }
-    //change String to Colors Type
-    func matchingCards (color : Colors , num : Int) -> Int{
-    var count = 0
-        for i in 0..<hand.count{
-            if self.hand[i].Color == color && self.hand[i].Roll == num{
-                count+=1
-            }
-        }
-        return count
+    func run(){
+        print("Running")
+        super.health-=10
     }
 }
 
+class Cheetah : Cat{
+
+override func run(){
+    print("Running Fast")
+    if super.health >= 50{
+        super.health-=50
+        
+    }
+}
+func sleep(){
+// if the health not equql 200
+  if super.health != 200{
+ // if the the difference bigger than or equl 50
+  if 200 - super.health >= 50 {
+      super.health+=50
+      print("less \(super.health)")
+  }
+  // if the the difference less than 50
+  else {
+  // The difference between 200 and the current health to be added to the extent that it reaches 200
+  let Healths = 200 - super.health
+      super.health+=Healths
+  }
+  }
+}
+    
+}
+
+class Lion : Cat{
+ override init( name : String){
+super.init(name: name )
+super.health = 200
+    
+}
+    override func growl(){
+        print("ROAR!!!! I am the King of the Jungle")
+    }
+}
+
+var cheetah = Cheetah(name: "Cheetah")
+cheetah.run()
+cheetah.run()
+cheetah.run()
+cheetah.run()
+cheetah.displayHealth()
+var lion = Lion(name: "Lion")
+lion.run()
+lion.run()
+lion.run()
+lion.growl()
 
